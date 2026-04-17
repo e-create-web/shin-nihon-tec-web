@@ -1,23 +1,49 @@
-<div id="opening-splash">
+<div class="opening-container absolute inset-0 w-full h-full flex items-center justify-center">
     <div class="absolute inset-0 overflow-hidden">
         <img src="/assets/images/image1.jpg" class="w-full h-full object-cover zoom-img grayscale" alt="Opening">
         <div class="absolute inset-0 bg-black/70"></div>
     </div>
 
     <div class="relative z-10 text-center text-white p-4">
-        <p class="text-sm md:text-lg tracking-[0.3em] mb-2 text-accent fade-up font-eng">ESTABLISHED IN</p>
-        <h1 class="text-6xl md:text-9xl font-black mb-6 tracking-wider fade-up leading-tight font-eng">
+        <p class="text-sm md:text-lg tracking-[0.3em] mb-2 text-accent font-eng opening-fade-up" style="animation-delay: 0.2s">
+            ESTABLISHED IN
+        </p>
+        <h1 class="text-6xl md:text-9xl font-black mb-6 tracking-wider leading-tight font-eng opening-fade-up" style="animation-delay: 0.5s">
             1946
         </h1>
-        <div class="w-24 h-1 bg-white mx-auto mb-6 fade-up"></div>
-        <p class="text-sm md:text-base tracking-widest fade-up text-gray-300 leading-relaxed">
+        <div class="w-24 h-1 bg-white mx-auto mb-6 opening-fade-up" style="animation-delay: 0.9s"></div>
+        <p class="text-sm md:text-base tracking-widest text-gray-300 leading-relaxed opening-fade-up" style="animation-delay: 1.1s">
             おかげさまで創業80周年<br>
             株式会社 新ニホンテック<br>
             <span class="text-xs opacity-70 mt-2 block">SHINNIHON TEC CO., LTD.</span>
         </p>
     </div>
-
-    <button onclick="skipAnimation()" class="absolute bottom-8 right-8 z-50 text-white border border-white/50 bg-black/30 hover:bg-white hover:text-gray-900 px-6 py-2 rounded-full text-xs font-bold tracking-widest transition duration-300 backdrop-blur-sm fade-up">
-        SKIP <i class="fas fa-chevron-right ml-1"></i>
-    </button>
 </div>
+
+<style>
+    /* アニメーション開始前は透明、終了後は表示状態(forwards)を維持 */
+    .opening-fade-up {
+        opacity: 0;
+        animation: fadeUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .zoom-img {
+        animation: zoomSlow 8s ease-out forwards;
+    }
+
+    @keyframes zoomSlow {
+        from { transform: scale(1); }
+        to   { transform: scale(1.08); }
+    }
+</style>

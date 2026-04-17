@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="リニア中央新幹線 山梨県駅 建設ライブ・タイムラプス | 株式会社 新ニホンテック">
+    <div class="pt-24 pb-20 bg-surface-alt min-h-screen">
+        <div class="container mx-auto px-4 max-w-5xl">
+            
+            <div class="mb-8">
+                <a href="/" class="inline-flex items-center text-gray-600 hover:text-accent font-bold transition">
+                    <i class="fas fa-arrow-left mr-2"></i> トップページへ戻る
+                </a>
+            </div>
+
+            <div class="mb-12">
+                <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded mb-3 inline-block animate-pulse">LOCAL PROJECT WATCH</span>
+                <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
+                    リニア中央新幹線 山梨県駅（仮称）<br>
+                    <span class="text-xl md:text-3xl text-gray-500 mt-2 block">建設ライブカメラ ＆ タイムラプス</span>
+                </h1>
+                <p class="mt-4 text-gray-600 leading-relaxed max-w-3xl">
+                    当社のすぐそば、甲府市大津町で始まった山梨の未来を創るビッグプロジェクト。品川まで約25分、名古屋まで約40分で結ばれる新駅の誕生を、地元企業として定点カメラから見守り、記録しています。<br>
+                    <span class="text-xs text-gray-400">※本映像は当社独自に設置したカメラによるものであり、当社が実際の駅建設工事に参画しているものではありません。</span>
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-12">
+                <h2 class="text-2xl font-bold mb-6 flex items-center border-b-2 border-accent pb-2 inline-block">
+                    現在の現場状況（定点ライブ配信）
+                </h2>
+                <div class="aspect-video w-full bg-black rounded-lg overflow-hidden shadow-inner relative mb-4">
+                    <iframe
+                        src="https://www.youtube.com/embed/so_3HK9HIdg?autoplay=1&mute=1"
+                        class="absolute inset-0 w-full h-full border-0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="text-sm text-gray-600 text-right">※映像はリアルタイムで配信されています。夜間は自動的に赤外線モードに切り替わります。</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-6 border-l-4 border-secondary pl-4">
+                        プロジェクト概要
+                    </h2>
+                    <table class="w-full text-left border-collapse">
+                        <tbody>
+                            <tr class="border-b">
+                                <th class="py-4 font-semibold text-gray-700 w-1/3">施設名称</th>
+                                <td class="py-4 text-gray-600">リニア中央新幹線 山梨県駅（仮称）</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="py-4 font-semibold text-gray-700">建設予定地</th>
+                                <td class="py-4 text-gray-600">山梨県甲府市大津町（アイメッセ山梨付近）</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="py-4 font-semibold text-gray-700">完成予定</th>
+                                <td class="py-4 text-gray-600">2031年予定（2026年3月着工）</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="py-4 font-semibold text-gray-700">駅の構造</th>
+                                <td class="py-4 text-gray-600">地上4階建て高架駅（島式2面ホーム・副本線あり）</td>
+                            </tr>
+                            <tr>
+                                <th class="py-4 font-semibold text-gray-700">周辺整備</th>
+                                <td class="py-4 text-gray-600">中央自動車道「甲府中央スマートIC（仮称）」直結、駅前エリア約24.5haのまちづくり整備</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-6 border-l-4 border-secondary pl-4">
+                        タイムラプス（進捗映像）
+                    </h2>
+                    <div class="aspect-video w-full bg-gray-200 rounded-lg flex flex-col items-center justify-center mb-4 cursor-pointer hover:bg-gray-300 transition group">
+                        <i class="fas fa-play-circle text-5xl text-gray-400 group-hover:text-accent mb-3 transition"></i>
+                        <p class="text-gray-600 font-bold">2026年3月 着工〜基礎整備編</p>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        着工から現在までの工事の進捗を早送りでご覧いただけます。田園地帯に徐々に駅の姿が現れる様子を、月ごとに更新していく予定です。
+                    </p>
+                    <div class="mt-6">
+                        <h3 class="font-bold text-gray-700 mb-2">過去のアーカイブ</h3>
+                        <ul class="text-sm text-accent space-y-2">
+                            <li><a href="#" class="hover:underline"><i class="fas fa-video mr-2"></i>2025年度 着工前・発掘調査ダイジェスト</a></li>
+                            <li><a href="#" class="hover:underline"><i class="fas fa-video mr-2"></i>2024年度 用地買収エリアのドローン空撮</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</Layout>

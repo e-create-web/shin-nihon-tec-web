@@ -1,9 +1,13 @@
-<section class="hero-bg h-screen min-h-[600px] flex items-center justify-center text-white mt-16">
-    <!-- <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent to-50%"></div> -->
-    <!-- <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-transparent"></div> -->
-    
-    <div class="relative z-10 container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center pt-16">
-        <div class="text-left">
+<!--
+    【背景画像について】
+    Swiperのfadeエフェクトでは .swiper-slide が position:absolute になる。
+    そのためコンポーネント内の子要素を absolute inset-0 で全面展開し、
+    hero-bg クラスをこの wrapper に付与することで背景画像を正しく表示する。
+-->
+<div class="hero-bg absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat flex items-center justify-center">
+
+    <div class="relative z-10 container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
+        <div class="text-left text-white">
             <span class="inline-block py-1 px-3 border border-white/50 rounded-full text-sm mb-4 tracking-wider bg-white/10 backdrop-blur">
                 電気工事・自動制御システム・CO2削減のプロ集団
             </span>
@@ -24,18 +28,28 @@
                 </a>
             </div>
         </div>
-        <div class="hidden md:block relative">
-                <div class="bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/20 max-w-sm ml-auto">
-                <h3 class="font-bold text-lg mb-2 border-b border-white/30 pb-2">Information</h3>
-                <p class="text-sm mb-2">2026.10.01 <span class="bg-secondary text-xs px-1 rounded ml-1">Info</span><br>創業記念日を迎えました。</p>
-                <p class="text-sm">2026.03.31 <span class="bg-secondary text-xs px-1 rounded ml-1">News</span><br>ホームページをリニューアルしました。</p>
-                </div>
+
+        <div class="hidden md:block">
+            <div class="bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/20 max-w-sm ml-auto">
+                <h3 class="font-bold text-lg text-white mb-2 border-b border-white/30 pb-2">Information</h3>
+                <p class="text-sm text-white mb-2">
+                    2026.10.01 <span class="bg-secondary text-xs px-1 rounded ml-1">Info</span><br>
+                    創業記念日を迎えました。
+                </p>
+                <p class="text-sm text-white">
+                    2026.03.31 <span class="bg-secondary text-xs px-1 rounded ml-1">News</span><br>
+                    ホームページをリニューアルしました。
+                </p>
+            </div>
         </div>
     </div>
-    
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <a href="#about" class="text-white opacity-80 hover:opacity-100">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
         </a>
     </div>
-</section>
+
+</div>

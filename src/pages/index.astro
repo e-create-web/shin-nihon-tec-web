@@ -21,21 +21,21 @@ import Contact from '../components/Contact.astro';
     <section class="h-screen min-h-[600px] mt-16 relative">
         <div class="swiper myHeroSwiper w-full h-full">
             <div class="swiper-wrapper">
-                
+
                 <div class="swiper-slide relative bg-gray-900 flex items-center">
-                    <!-- <div class="absolute inset-0 bg-[url('/assets/images/image1.jpg')] bg-cover bg-center grayscale opacity-50"></div> -->
-                     <Opening />
+                    <Opening />
                 </div>
 
                 <div class="swiper-slide relative bg-gray-900 flex items-center">
-                     <Hero />
+                    <Hero />
                 </div>
 
                 <div class="swiper-slide relative bg-surface-alt flex flex-col items-center justify-center">
                     <Live />
                 </div>
+
             </div>
-            
+
             <div class="swiper-pagination"></div>
             <div class="swiper-button-next !text-white drop-shadow"></div>
             <div class="swiper-button-prev !text-white drop-shadow"></div>
@@ -46,33 +46,80 @@ import Contact from '../components/Contact.astro';
     <script is:inline>
       document.addEventListener('DOMContentLoaded', function () {
         const swiper = new Swiper('.myHeroSwiper', {
-          loop: true, // 最後までいったら最初に戻るループ設定
-          
-          // 自動再生と手動操作を両立する設定
-          autoplay: {
-            delay: 5000, // 5000ミリ秒（5秒）ごとにスライド
-            disableOnInteraction: false, // ユーザーが矢印やドットを操作しても自動再生を止めない
-            pauseOnMouseEnter: true, // ★マウスがスライドに乗っている間は一時停止する
+          loop: false, // Openingを最初に1度だけ表示するためloopはOFF
+          initialSlide: 0,
+
+          autoplay: false, // Opening演出中はautoplay無効（演出完了後に有効化）
+
+          speed: 1000, // スライドのトランジション時間（ms）
+
+          effect: 'fade',
+          fadeEffect: {
+            crossFade: true,
           },
-          
-          // エフェクト（お好みで 'fade' に変更してもかっこいいです）
-          effect: 'slide', 
-          
-          // ドット（ページネーション）の設定
+
+          allowTouchMove: false, // Opening中はスワイプ操作を禁止
+
           pagination: {
             el: '.swiper-pagination',
-            clickable: true, // ドットをクリックして直接そのスライドに飛べるようにする
+            clickable: true,
           },
-          
-          // 左右の矢印（ナビゲーション）の設定
+
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
           },
         });
+
+        // Opening演出完了後にHeroスライドへ移行し、通常のSwiper操作を開始する
+        window.onOpeningComplete = function () {
+          swiper.slideNext(1000); // 1000msのトランジションでHeroへ移動
+
+          setTimeout(function () {
+            swiper.allowTouchMove = true; // スワイプ操作を解放
+            swiper.autoplay.start();      // 自動再生を開始
+            swiper.params.loop = true;    // ループを有効化
+            swiper.update();
+          }, 900);
+        };
       });
     </script>
 
+    <script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+        const swiper = new Swiper('.myHeroSwiper', {
+        loop: false,
+        initialSlide: 0,
+        autoplay: false,
+        speed: 1000,
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        allowTouchMove: false, // 最初は操作禁止
+        pagination: { el: '.swiper-pagination', clickable: true },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        });
+
+        // オープニング演出の時間（4.5秒）
+        const OPENING_DURATION = 4500;
+
+        // 最初の1回だけ実行されるタイマー
+        setTimeout(function() {
+        // 演出が終わったらHeroへ移動
+        swiper.slideNext(1000);
+
+        // 移動完了後にループや操作を有効化
+        setTimeout(function () {
+            swiper.allowTouchMove = true; 
+            swiper.autoplay.start({
+            delay: 5000,
+            disableOnInteraction: false,
+            });
+            swiper.params.loop = true;
+            swiper.update(); // ループ設定を反映
+        }, 1000);
+        }, OPENING_DURATION);
+    });
+    </script>
 
     <About />
     <Company />
@@ -84,8 +131,7 @@ import Contact from '../components/Contact.astro';
     <Recruit />
     <Access />
     <Contact />
-    
+
     <script src="/assets/js/common.js" is:inline></script>
     <script src="/assets/js/top.js" is:inline></script>
-
 </Layout>
