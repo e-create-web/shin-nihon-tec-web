@@ -156,6 +156,11 @@ footer a {
      バッジ
      ======================================== */
 
+/* バッジの共通ベーススタイル（色以外を定義） */
+  .badge--event {
+    @apply inline-block bg-accent text-white text-xs font-bold px-3 py-1 rounded-full mb-4 tracking-wider uppercase;
+  }
+
   /* アクセントカラー（緑）のバッジ */
   .badge--accent {
     @apply bg-accent text-white text-xs font-bold px-2 py-1 rounded;
