@@ -46,6 +46,9 @@
   --color-accent-muted: var(--theme-accent-muted);
   --color-accent-opening: var(--theme-accent-opening);
   --color-accent-top: var(--theme-accent-top);
+
+  /* ★ここに追加！Tailwindに独自フォントを登録します */
+  --font-eng: 'Oswald', sans-serif;
 }
 
 /* 全ページ共通のスタイル */
@@ -54,11 +57,153 @@ body {
     font-weight: 400; 
     letter-spacing: 0.05em; 
 }
-.font-eng { font-family: 'Oswald', sans-serif; }
-.scroll-smooth { scroll-behavior: smooth; }
 
+.scroll-smooth { scroll-behavior: smooth; }
+/* ↓ ★この1行を削除してください（Tailwindが自動生成するようになります） */
+/* .font-eng { font-family: 'Oswald', sans-serif; } */
 /* フッターのリンクが前面に来るように調整 */
 footer a {
     position: relative;
     z-index: 20;
+}
+
+
+/* --- 4. 共通コンポーネント（部品） --- */
+@layer components {
+
+  /* ========================================
+     セクション構造
+     ======================================== */
+
+  /* セクション内の基本コンテナ */
+  .section-container {
+    @apply container mx-auto px-4;
+  }
+
+  /* セクション見出しブロック全体（中央寄せ・下マージン付き） */
+  .section-header {
+    @apply text-center mb-12 md:mb-16;
+  }
+
+  /* 見出し上の英語小見出し（アイキャッチャー） */
+  .section-eyebrow {
+    @apply text-accent font-eng tracking-widest text-sm md:text-base font-bold block mb-2 uppercase;
+  }
+
+  /* セクションのメイン見出し（h2） */
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-primary mb-4;
+  }
+
+  /* 見出し下の緑のアクセントバー（中央寄せ） */
+  .section-divider {
+    @apply w-12 h-1 bg-accent mx-auto;
+  }
+
+  /* 見出し下の緑のアクセントバー（左寄せ） */
+  .section-divider--left {
+    @apply w-12 h-1 bg-accent;
+  }
+
+
+  /* ========================================
+     ボタン
+     ======================================== */
+
+  /* グリーンの塗りつぶしボタン（メインCTA） */
+  .btn-primary {
+    @apply inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-white font-bold py-3 px-10 rounded-full transition duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  /* 白背景・ボーダー付きボタン（戻るボタン・サブCTA） */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center bg-surface border border-border text-primary font-bold py-3 px-8 rounded-full hover:bg-surface-alt transition duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5;
+  }
+
+
+  /* ========================================
+     カード
+     ======================================== */
+
+  /* 強み・特徴紹介用カード（大きい影・ホバーあり） */
+  .card--feature {
+    @apply bg-surface p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-border relative overflow-hidden;
+  }
+
+  /* 実績・一覧用カード（シンプル・ホバーあり） */
+  /* groupを削除, .astroの方に記述 */
+  .card--works {
+    @apply bg-surface rounded shadow hover:shadow-lg transition border border-border;
+  }
+
+  /* 情報表示用カード（bg-light・角丸） */
+  .card--info {
+    @apply bg-light rounded-xl shadow p-8 border border-border;
+  }
+
+  /* アクセス等の小さい情報カード（bg-surface・丸み小） */
+  .card--detail {
+    @apply bg-surface p-6 rounded-lg shadow-sm border border-border;
+  }
+
+
+  /* ========================================
+     バッジ
+     ======================================== */
+
+  /* アクセントカラー（緑）のバッジ */
+  .badge--accent {
+    @apply bg-accent text-white text-xs font-bold px-2 py-1 rounded;
+  }
+
+  /* プライマリカラー（ネイビー）のバッジ */
+  .badge--primary {
+    @apply bg-primary text-white text-xs font-bold px-2 py-1 rounded;
+  }
+
+
+  /* ========================================
+     アイコン丸コンテナ
+     ======================================== */
+
+  /* 強み用アイコン円（アクセント薄背景） */
+  .icon-circle--accent {
+    @apply w-16 h-16 bg-accent-muted rounded-full flex items-center justify-center text-accent;
+  }
+
+  /* 感染症対策ページ等の情報アイコン円（サーフェス背景・ボーダー付き） */
+  .icon-circle--surface {
+    @apply w-16 h-16 bg-surface-alt rounded-full flex items-center justify-center text-primary text-2xl border border-border shadow-inner flex-shrink-0;
+  }
+
+
+  /* ========================================
+     パンくずリスト
+     ======================================== */
+
+  /* パンくずリストのコンテナ */
+  .breadcrumb {
+    @apply text-sm text-text-muted mb-8;
+  }
+
+  /* パンくずリスト内のリンク */
+  .breadcrumb a {
+    @apply hover:text-accent transition;
+  }
+
+  /* パンくずリスト内の現在ページ */
+  .breadcrumb span {
+    @apply text-primary font-bold;
+  }
+
+
+  /* ========================================
+     チェックリスト
+     ======================================== */
+
+  /* チェックマーク付きリストアイテム */
+  .checklist-item {
+    @apply flex items-center;
+  }
+
 }
