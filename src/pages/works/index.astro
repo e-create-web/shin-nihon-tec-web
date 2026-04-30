@@ -1,0 +1,171 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getWorks } from '../../library/microcms';
+
+// microCMSから実績データを全件取得
+const response = await getWorks({ limit: 100 });
+const works = response.contents;
+
+// 重複のない全カテゴリのリストを作成（絞り込みボタン用）
+// ※microCMSのセレクトフィールドの仕様に対応するため、配列でも文字列でも正しく抽出します
+const allCategories = Array.from(new Set(
+  works.flatMap(w => Array.isArray(w.category) ? w.category : (w.category ? [w.category] : []))
+));
+---
+
+<Layout title="開発・製作実績 | 株式会社 新ニホンテック">
+    <div class="pt-24 pb-20 bg-light min-h-screen">
+        <div class="container mx-auto px-4 max-w-5xl">
+            
+            <!-- パンくずリスト -->
+            <div class="text-sm text-gray-500 mb-8">
+                <a href="/" class="hover:text-accent transition font-bold"><i class="fas fa-home mr-1"></i>トップ</a> &rsaquo;
+                <span class="text-primary font-bold">開発・製作実績</span>
+            </div>
+
+            <!-- タイトル -->
+            <div class="text-center mb-12 md:mb-20">
+                <span class="text-accent font-eng tracking-widest text-sm md:text-base font-bold block mb-2 uppercase">Works</span>
+                <h1 class="text-3xl md:text-4xl font-bold text-primary mb-4 tracking-wider">開発・製作実績</h1>
+                <div class="w-12 h-1 bg-accent mx-auto"></div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-10 border border-gray-100">
+                
+                <!-- 絞り込みボタン (イベント一覧と同じ機能) -->
+                <div class="mb-8 border-b border-gray-200 pb-6">
+                    <div class="flex flex-wrap gap-2" id="category-filters">
+                        <button class="filter-btn active px-4 py-2 rounded-full text-sm font-bold transition bg-primary text-white shadow-md" data-category="all">
+                            すべて
+                        </button>
+                        {allCategories.map(category => (
+                            <button class="filter-btn px-4 py-2 rounded-full text-sm font-bold transition bg-gray-100 text-primary hover:bg-gray-200 border border-gray-200" data-category={category}>
+                                {category}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+<!-- 実績カード一覧 (間延びバグ完全修正版) -->
+                <!-- ★修正1: 末尾に content-start を追加して、カードが異常に伸びるのを防ぎ、上詰めにします -->
+                <div id="works-list" class="grid grid-cols-1 md:grid-cols-3 gap-6 min-h-[400px] content-start">
+                    {works.map((work) => {
+                        // カテゴリと画像の安全な取得
+                        const catArray = Array.isArray(work.category) ? work.category : (work.category ? [work.category] : []);
+                        const categoriesString = catArray.join(',');
+                        const displayCategory = catArray.length > 0 ? catArray[0] : '';
+                        const imgUrl = work['top-image'] ? work['top-image'].url : '/assets/images/logo.png';
+
+                        return (
+                            // ★修正2: block を flex flex-col h-full に変更し、カードの高さを綺麗に揃えます
+                            <a href={`/works/${work.id}`} class="work-item flex flex-col bg-white rounded-lg shadow-sm hover:shadow-xl transition group border border-gray-200 overflow-hidden h-full" data-categories={categoriesString}>
+                                
+                                <!-- ★修正3: h-48 を h-40 にして少し画像を短くし、shrink-0 で画像が潰れるのを防ぎます -->
+                                <div class="overflow-hidden h-40 relative bg-gray-50 shrink-0">
+                                    <img src={imgUrl} class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt={work.title}>
+                                    {displayCategory && (
+                                        <div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded shadow-sm">{displayCategory}</div>
+                                    )}
+                                </div>
+
+                                <!-- ★修正4: flex-1 を追加して、文字の箱に余白を管理させます -->
+                                <div class="p-4 bg-white flex flex-col flex-1">
+                                    <h3 class="font-bold text-base mb-2 text-primary group-hover:text-accent transition line-clamp-2">{work.title}</h3>
+                                    
+                                    <!-- ★修正5: mt-auto を追加して、場所のテキストを常に「カードの一番下」に固定します -->
+                                    {work.location && (
+                                        <p class="text-xs text-gray-500 mt-auto">
+                                            <i class="fas fa-map-marker-alt mr-1 text-gray-400"></i>{work.location}
+                                        </p>
+                                    )}
+                                </div>
+                            </a>
+                        );
+                    })}
+                </div>
+
+                <!-- ページネーション -->
+                <div id="pagination" class="flex justify-center items-center gap-2 mt-10"></div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="/#works" class="inline-block bg-white border border-gray-300 text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-50 transition shadow-sm hover:-translate-y-0.5">
+                    トップページへ戻る
+                </a>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', () => {
+    const ITEMS_PER_PAGE = 9; // 3列 × 3段
+    let currentPage = 1;
+    let currentFilter = 'all';
+
+    const items = Array.from(document.querySelectorAll('.work-item'));
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const paginationContainer = document.getElementById('pagination');
+    const worksListContainer = document.getElementById('works-list');
+
+    function render() {
+        const filteredItems = items.filter(item => {
+            if (currentFilter === 'all') return true;
+            const categories = item.getAttribute('data-categories').split(',');
+            return categories.includes(currentFilter);
+        });
+
+        const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+        if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+
+        items.forEach(item => item.style.display = 'none');
+        filteredItems.slice(startIndex, endIndex).forEach(item => {
+            item.style.display = 'block';
+        });
+
+        renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+        paginationContainer.innerHTML = '';
+        if (totalPages <= 1) return;
+
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.textContent = i;
+            if (i === currentPage) {
+                btn.className = 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-accent text-white shadow-md';
+            } else {
+                btn.className = 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-gray-100 text-primary hover:bg-gray-200 border border-gray-200 transition cursor-pointer';
+            }
+            
+            btn.addEventListener('click', () => {
+                currentPage = i;
+                render();
+                window.scrollTo({ top: worksListContainer.offsetTop - 100, behavior: 'smooth' });
+            });
+            paginationContainer.appendChild(btn);
+        }
+    }
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-primary', 'text-white', 'shadow-md');
+                b.classList.add('bg-gray-100', 'text-primary');
+            });
+            e.currentTarget.classList.remove('bg-gray-100', 'text-primary');
+            e.currentTarget.classList.add('bg-primary', 'text-white', 'shadow-md');
+
+            currentFilter = e.currentTarget.getAttribute('data-category');
+            currentPage = 1;
+            render();
+        });
+    });
+
+    render();
+});
+</script>
