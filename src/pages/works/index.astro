@@ -7,18 +7,18 @@ const response = await getWorks({ limit: 100 });
 const works = response.contents;
 
 // 重複のない全カテゴリのリストを作成（絞り込みボタン用）
-// ※microCMSのセレクトフィールドの仕様に対応するため、配列でも文字列でも正しく抽出します
 const allCategories = Array.from(new Set(
   works.flatMap(w => Array.isArray(w.category) ? w.category : (w.category ? [w.category] : []))
 ));
 ---
 
 <Layout title="開発・製作実績 | 株式会社 新ニホンテック">
+    <!-- 背景に bg-light を適用 (すでに設定済み) -->
     <div class="pt-24 pb-20 bg-light min-h-screen">
         <div class="container mx-auto px-4 max-w-5xl">
             
             <!-- パンくずリスト -->
-            <div class="text-sm text-gray-500 mb-8">
+            <div class="text-sm text-text-muted mb-8">
                 <a href="/" class="hover:text-accent transition font-bold"><i class="fas fa-home mr-1"></i>トップ</a> &rsaquo;
                 <span class="text-primary font-bold">開発・製作実績</span>
             </div>
@@ -30,52 +30,52 @@ const allCategories = Array.from(new Set(
                 <div class="w-12 h-1 bg-accent mx-auto"></div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-lg p-6 md:p-10 border border-gray-100">
+            <!-- ★ bg-white -> bg-surface, border-gray-100 -> border-border -->
+            <div class="bg-surface rounded-xl shadow-lg p-6 md:p-10 border border-border">
                 
-                <!-- 絞り込みボタン (イベント一覧と同じ機能) -->
-                <div class="mb-8 border-b border-gray-200 pb-6">
+                <!-- 絞り込みボタン -->
+                <div class="mb-8 border-b border-border pb-6">
                     <div class="flex flex-wrap gap-2" id="category-filters">
                         <button class="filter-btn active px-4 py-2 rounded-full text-sm font-bold transition bg-primary text-white shadow-md" data-category="all">
                             すべて
                         </button>
                         {allCategories.map(category => (
-                            <button class="filter-btn px-4 py-2 rounded-full text-sm font-bold transition bg-gray-100 text-primary hover:bg-gray-200 border border-gray-200" data-category={category}>
+                            <!-- ★ bg-gray-100 -> bg-surface-alt, border-gray-200 -> border-border -->
+                            <button class="filter-btn px-4 py-2 rounded-full text-sm font-bold transition bg-surface-alt text-primary hover:bg-border border border-border" data-category={category}>
                                 {category}
                             </button>
                         ))}
                     </div>
                 </div>
 
-<!-- 実績カード一覧 (間延びバグ完全修正版) -->
-                <!-- ★修正1: 末尾に content-start を追加して、カードが異常に伸びるのを防ぎ、上詰めにします -->
+                <!-- 実績カード一覧 -->
                 <div id="works-list" class="grid grid-cols-1 md:grid-cols-3 gap-6 min-h-[400px] content-start">
                     {works.map((work) => {
-                        // カテゴリと画像の安全な取得
                         const catArray = Array.isArray(work.category) ? work.category : (work.category ? [work.category] : []);
                         const categoriesString = catArray.join(',');
                         const displayCategory = catArray.length > 0 ? catArray[0] : '';
                         const imgUrl = work['top-image'] ? work['top-image'].url : '/assets/images/logo.png';
 
                         return (
-                            // ★修正2: block を flex flex-col h-full に変更し、カードの高さを綺麗に揃えます
-                            <a href={`/works/${work.id}`} class="work-item flex flex-col bg-white rounded-lg shadow-sm hover:shadow-xl transition group border border-gray-200 overflow-hidden h-full" data-categories={categoriesString}>
+                            <!-- ★ bg-white -> bg-surface, border-gray-200 -> border-border -->
+                            <a href={`/works/${work.id}`} class="work-item flex flex-col bg-surface rounded-lg shadow-sm hover:shadow-xl transition group border border-border overflow-hidden h-full" data-categories={categoriesString}>
                                 
-                                <!-- ★修正3: h-48 を h-40 にして少し画像を短くし、shrink-0 で画像が潰れるのを防ぎます -->
-                                <div class="overflow-hidden h-40 relative bg-gray-50 shrink-0">
+                                <!-- ★ bg-gray-50 -> bg-surface-alt -->
+                                <div class="overflow-hidden h-40 relative bg-surface-alt shrink-0">
                                     <img src={imgUrl} class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt={work.title}>
                                     {displayCategory && (
                                         <div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded shadow-sm">{displayCategory}</div>
                                     )}
                                 </div>
-
-                                <!-- ★修正4: flex-1 を追加して、文字の箱に余白を管理させます -->
-                                <div class="p-4 bg-white flex flex-col flex-1">
+                                
+                                <!-- ★ bg-white -> bg-surface -->
+                                <div class="p-3 bg-surface flex flex-col flex-1">
                                     <h3 class="font-bold text-base mb-2 text-primary group-hover:text-accent transition line-clamp-2">{work.title}</h3>
                                     
-                                    <!-- ★修正5: mt-auto を追加して、場所のテキストを常に「カードの一番下」に固定します -->
+                                    <!-- ★ text-gray-500, text-gray-400 -> text-text-muted -->
                                     {work.location && (
-                                        <p class="text-xs text-gray-500 mt-auto">
-                                            <i class="fas fa-map-marker-alt mr-1 text-gray-400"></i>{work.location}
+                                        <p class="text-xs text-text-muted mt-auto">
+                                            <i class="fas fa-map-marker-alt mr-1 text-text-muted"></i>{work.location}
                                         </p>
                                     )}
                                 </div>
@@ -89,7 +89,8 @@ const allCategories = Array.from(new Set(
             </div>
 
             <div class="mt-16 text-center">
-                <a href="/#works" class="inline-block bg-white border border-gray-300 text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-50 transition shadow-sm hover:-translate-y-0.5">
+                <!-- ★ bg-white -> bg-surface, border-gray-300 -> border-border, hover:bg-gray-50 -> hover:bg-surface-alt -->
+                <a href="/#works" class="inline-block bg-surface border border-border text-primary font-bold py-3 px-8 rounded-full hover:bg-surface-alt transition shadow-sm hover:-translate-y-0.5">
                     トップページへ戻る
                 </a>
             </div>
@@ -139,7 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (i === currentPage) {
                 btn.className = 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-accent text-white shadow-md';
             } else {
-                btn.className = 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-gray-100 text-primary hover:bg-gray-200 border border-gray-200 transition cursor-pointer';
+                // ★ bg-gray-100 -> bg-surface-alt, border-gray-200 -> border-border
+                btn.className = 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-surface-alt text-primary hover:bg-border border border-border transition cursor-pointer';
             }
             
             btn.addEventListener('click', () => {
@@ -155,9 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', (e) => {
             filterBtns.forEach(b => {
                 b.classList.remove('bg-primary', 'text-white', 'shadow-md');
-                b.classList.add('bg-gray-100', 'text-primary');
+                // ★ bg-gray-100 -> bg-surface-alt
+                b.classList.add('bg-surface-alt', 'text-primary');
             });
-            e.currentTarget.classList.remove('bg-gray-100', 'text-primary');
+            // ★ bg-gray-100 -> bg-surface-alt
+            e.currentTarget.classList.remove('bg-surface-alt', 'text-primary');
             e.currentTarget.classList.add('bg-primary', 'text-white', 'shadow-md');
 
             currentFilter = e.currentTarget.getAttribute('data-category');
