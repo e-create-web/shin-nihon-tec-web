@@ -1,24 +1,30 @@
 <section id="service" class="py-24 bg-primary text-surface relative">
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full"><path d="M0 100 L100 0 L100 100 Z" fill="white" /></svg>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full">
+            <path d="M0 100 L100 0 L100 100 Z" fill="white" />
+        </svg>
     </div>
 
-    <div class="container mx-auto px-4 relative z-10">
-        <div class="text-center mb-12 md:mb-16">
-            <span class="text-accent font-eng tracking-widest text-sm md:text-base font-bold block mb-2 uppercase">Service</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-surface mb-4">事業内容</h2>
-            <div class="w-12 h-1 bg-accent mx-auto mb-4"></div>
+    <div class="section-container relative z-10">
+        <!-- ヘッダー -->
+        <div class="section-header">
+            <span class="section-eyebrow">Service</span>
+            <h2 class="section-title-white">事業内容</h2>
+            <div class="section-divider mb-4"></div>
             <p class="text-surface-alt">公共工事から工場メンテナンスまで、幅広く対応します</p>
         </div>
 
+        <!-- 事業内容 -->
         <div class="space-y-12">
+            <!-- カード1枚目 -->
             <div class="flex flex-col md:flex-row items-center bg-surface text-text-body rounded-xl overflow-hidden shadow-2xl">
                 <div class="md:w-1/2 h-64 md:h-auto">
                     <img src="/assets/images/service1.jpg" alt="電気工事" class="w-full h-full object-cover">
                 </div>
+
                 <div class="md:w-1/2 p-8 md:p-12">
                     <div class="flex items-center mb-4">
-                        <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded mr-3">01</span>
+                        <span class="badge--accent mr-3">01</span>
                         <h3 class="text-2xl font-bold text-primary">装置開発・設計・製作</h3>
                     </div>
                     <p class="text-text-body mb-6">
@@ -26,21 +32,23 @@
                         安全第一をモットーに、将来の増設も見据えた最適な配線設計を行います。
                     </p>
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-text-body font-bold">
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>公共・建設付帯工事</li>
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>工場電気設備メンテナンス</li>
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>一般木造住宅工事</li>
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>消防施設工事</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>公共・建設付帯工事</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>工場電気設備メンテナンス</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>一般木造住宅工事</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>消防施設工事</li>
                     </ul>
                 </div>
             </div>
 
+            <!-- カード2枚目 -->
             <div class="flex flex-col md:flex-row-reverse items-center bg-surface text-text-body rounded-xl overflow-hidden shadow-2xl">
                 <div class="md:w-1/2 h-64 md:h-auto">
                     <img src="/assets/images/service2.jpg" alt="制御盤" class="w-full h-full object-cover">
                 </div>
+
                 <div class="md:w-1/2 p-8 md:p-12">
                     <div class="flex items-center mb-4">
-                        <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded mr-3">02</span>
+                        <span class="badge--accent mr-3">02</span>
                         <h3 class="text-2xl font-bold text-primary">自動制御（FA）・盤製作</h3>
                     </div>
                     <p class="text-text-body mb-6">
@@ -49,21 +57,23 @@
                         県内約60社の工場と取引があり、緊急対応能力に定評があります。
                     </p>
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-text-body font-bold">
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>制御盤設計・製作</li>
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>PLCソフト開発</li>
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>タッチパネル画面作成</li>
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>機体配線工事</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>制御盤設計・製作</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>PLCソフト開発</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>タッチパネル画面作成</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>機体配線工事</li>
                     </ul>
                 </div>
             </div>
         
-                <div class="flex flex-col md:flex-row items-center bg-surface text-text-body rounded-xl overflow-hidden shadow-2xl">
+            <!-- カード3枚目 -->
+            <div class="flex flex-col md:flex-row items-center bg-surface text-text-body rounded-xl overflow-hidden shadow-2xl">
                 <div class="md:w-1/2 h-64 md:h-auto">
-                        <img src="/assets/images/service3.jpg" alt="省エネ" class="w-full h-full object-cover">
+                    <img src="/assets/images/service3.jpg" alt="省エネ" class="w-full h-full object-cover">
                 </div>
+
                 <div class="md:w-1/2 p-8 md:p-12">
                     <div class="flex items-center mb-4">
-                        <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded mr-3">03</span>
+                        <span class="badge--accent mr-3">03</span>
                         <h3 class="text-2xl font-bold text-primary">CO2削減・その他設備</h3>
                     </div>
                     <p class="text-text-body mb-6">
@@ -71,14 +81,16 @@
                         省エネ提案を通じて、CO2削減と環境保全に貢献します。 
                         また、自動火災報知器の法定点検なども承ります。
                     </p>
-                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-text-body font-bold">
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>LED照明更新</li>
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>太陽光発電設備</li>
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>自動火災報知器法定点検</li>
-                        <li class="flex items-center"><span class="text-accent mr-2">✓</span>漏電調査・改修</li>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-text-body font-bold">
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>LED照明更新</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>太陽光発電設備</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>自動火災報知器法定点検</li>
+                        <li class="checklist-item"><span class="text-accent mr-2">✓</span>漏電調査・改修</li>
                     </ul>
                 </div>
             </div>
+
         </div>
+
     </div>
 </section>
