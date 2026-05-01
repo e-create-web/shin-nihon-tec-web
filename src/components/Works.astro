@@ -1,3 +1,11 @@
+---
+import { getWorks } from '../library/microcms';
+
+// microCMSから最新3件を取得
+const response = await getWorks({ limit: 3 });
+const works = response.contents;
+---
+
 <section id="works" class="py-24 bg-light">
     <div class="section-container">
         <!-- セクションヘッダー -->
@@ -6,50 +14,45 @@
             <div class="section-divider"></div>
         </div>
         
+        <!-- 実績カード -->
         <div class="grid md:grid-cols-3 gap-6">
-            <!-- 一枚目 -->
-            <div class="card--works">
-                <div class="overflow-hidden h-48 relative">
-                    <img src="assets/images/work1-unsplash.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="施工事例">
-                    <div class="absolute top-2 left-2">
-                        <span class="badge--primary">工場設備</span>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-bold text-lg mb-2 text-primary group-hover:text-accent transition">食品工場ライン増設工事</h3>
-                    <p class="text-sm text-text-muted">山梨県内 / 動力配線・制御盤設置</p>
-                </div>
-            </div>
+            {works.map((work) => {
+                const catArray = Array.isArray(work.category)
+                    ? work.category
+                    : (work.category ? [work.category] : []);
+                const displayCategory = catArray.length > 0 ? catArray[0] : '';
+                const imgUrl = work['top-image']
+                    ? work['top-image'].url
+                    : '/assets/images/logo.png';
 
-            <!-- 二枚目 -->
-            <div class="card--works">
-                <div class="overflow-hidden h-48 relative">
-                    <img src="assets/images/works2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="施工事例">
-                    <div class="absolute top-2 left-2">
-                        <span class="badge--primary">公共工事</span></div>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-bold text-lg mb-2 text-primary group-hover:text-accent transition">公共施設 LED化改修工事</h3>
-                    <p class="text-sm text-text-muted">甲府市内 / 省エネ提案施工</p>
-                </div>
-            </div>
-
-            <!-- 三枚目 -->
-            <div class="card--works">
-                <div class="overflow-hidden h-48 relative">
-                    <img src="assets/images/work3-unsplash.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="施工事例">
-                    <div class="absolute top-2 left-2">
-                        <span class="badge--primary">制御盤</span>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-bold text-lg mb-2 text-primary group-hover:text-accent transition">排水処理設備制御盤 更新</h3>
-                    <p class="text-sm text-text-muted">南アルプス市 / PLCソフト入替</p>
-                </div>
-            </div>
-
+                return (
+                    <a href={`/works/${work.id}`} class="card--works group">
+                        <div class="overflow-hidden h-48 relative">
+                            <img
+                                src={imgUrl}
+                                class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                                alt={work.title}
+                            />
+                            {displayCategory && (
+                                <div class="absolute top-2 left-2">
+                                    <span class="badge--primary">{displayCategory}</span>
+                                </div>
+                            )}
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-primary group-hover:text-accent transition line-clamp-2">
+                                {work.title}
+                            </h3>
+                            {work.location && (
+                                <p class="text-sm text-text-muted">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>{work.location}
+                                </p>
+                            )}
+                        </div>
+                    </a>
+                );
+            })}
         </div>
-
 
         <div class="mt-16 md:mt-20 text-center">
             <a href="/works" class="btn-secondary">
