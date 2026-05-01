@@ -110,74 +110,12 @@ const linkableTags = ["記念式典", "社内行事", "アーカイブ"];
 
 </Layout>
 
+<script src="/assets/js/filter-pagination.js" is:inline></script>
 <script is:inline>
-document.addEventListener('DOMContentLoaded', () => {
-    const ITEMS_PER_PAGE = 10;
-    let currentPage = 1;
-    let currentFilter = 'all';
-
-    const items = Array.from(document.querySelectorAll('.event-item'));
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const paginationContainer = document.getElementById('pagination');
-    const eventListContainer = document.getElementById('event-list');
-
-    function render() {
-        const filteredItems = items.filter(item => {
-            if (currentFilter === 'all') return true;
-            const tags = item.getAttribute('data-tags').split(',');
-            return tags.includes(currentFilter);
-        });
-
-        const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
-        if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
-
-        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-        const endIndex = startIndex + ITEMS_PER_PAGE;
-
-        items.forEach(item => item.style.display = 'none');
-        filteredItems.slice(startIndex, endIndex).forEach(item => {
-            item.style.display = 'block';
-        });
-
-        renderPagination(totalPages);
-    }
-
-    function renderPagination(totalPages) {
-        paginationContainer.innerHTML = '';
-        if (totalPages <= 1) return;
-
-        for (let i = 1; i <= totalPages; i++) {
-            const btn = document.createElement('button');
-            btn.textContent = i;
-            btn.className = i === currentPage
-                ? 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-accent text-white shadow-md'
-                : 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-surface-alt text-primary hover:bg-border border border-border transition cursor-pointer';
-
-            btn.addEventListener('click', () => {
-                currentPage = i;
-                render();
-                window.scrollTo({ top: eventListContainer.offsetTop - 100, behavior: 'smooth' });
-            });
-
-            paginationContainer.appendChild(btn);
-        }
-    }
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            filterBtns.forEach(b => {
-                b.classList.remove('bg-primary', 'text-white', 'shadow-md');
-                b.classList.add('bg-surface-alt', 'text-primary');
-            });
-            e.currentTarget.classList.remove('bg-surface-alt', 'text-primary');
-            e.currentTarget.classList.add('bg-primary', 'text-white', 'shadow-md');
-
-            currentFilter = e.currentTarget.getAttribute('data-tag');
-            currentPage = 1;
-            render();
-        });
-    });
-
-    render();
-});
+  initFilterPagination({
+    itemSelector: '.event-item',
+    filterSelector: '.filter-btn',
+    dataAttr: 'data-tags',
+    itemsPerPage: 10
+  });
 </script>
