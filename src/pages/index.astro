@@ -17,27 +17,30 @@ import Contact from '../components/Contact.astro';
 
 <Layout>
     <div id="opening-splash">
-        <div class="absolute inset-0 overflow-hidden">
-            <img src="/assets/images/image1.jpg" class="w-full h-full object-cover zoom-img grayscale" alt="Opening">
-            <div class="absolute inset-0 bg-black/70"></div>
+
+        <!-- 背景画像＋オーバーレイ -->
+        <div class="splash-bg">
+            <img src="/assets/images/image1.jpg" class="splash-bg-img" alt="Opening">
+            <div class="splash-bg-overlay"></div>
         </div>
 
-        <div class="relative z-10 text-center text-white p-4">
-            <p class="text-sm md:text-lg tracking-[0.3em] mb-2 text-accent-opening fade-up font-eng">ESTABLISHED IN</p>
-            <h1 class="text-6xl md:text-9xl font-black mb-6 tracking-wider fade-up leading-tight font-eng">
-                1946
-            </h1>
-            <div class="w-24 h-1 bg-white mx-auto mb-6 fade-up"></div>
-            <p class="text-sm md:text-base tracking-widest fade-up text-gray-300 leading-relaxed">
+        <!-- テキストコンテンツ -->
+        <div class="splash-content">
+            <span class="splash-label">ESTABLISHED IN</span>
+            <span class="splash-year">1946</span>
+            <div class="splash-divider"></div>
+            <p class="splash-text">
                 おかげさまで創業80周年<br>
                 株式会社 新ニホンテック<br>
-                <span class="text-xs opacity-70 mt-2 block">SHINNIHON TEC CO., LTD.</span>
+                <span class="splash-text-sub">SHINNIHON TEC CO., LTD.</span>
             </p>
         </div>
 
-        <button onclick="skipAnimation()" class="absolute bottom-8 right-8 z-50 text-white border border-white/50 bg-black/30 hover:bg-white hover:text-gray-900 px-6 py-2 rounded-full text-xs font-bold tracking-widest transition duration-300 backdrop-blur-sm fade-up">
+        <!-- SKIPボタン -->
+        <button onclick="skipAnimation()" class="splash-skip-btn">
             SKIP <i class="fas fa-chevron-right ml-1"></i>
         </button>
+
     </div>
 
     <Hero />
