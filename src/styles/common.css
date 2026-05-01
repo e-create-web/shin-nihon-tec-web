@@ -19,6 +19,11 @@
   /* --- テキスト・ボーダー --- */
   --theme-text-body: #495057;   /* ミディアムグレー - 長文のテキスト用（視認性と柔らかさを両立） */
   --theme-text-muted: #868e96;  /* ライトグレー - 補足説明やプレースホルダー、目立たせたくない文字用 */
+
+  /* ★ここを追加：暗い背景に乗せる文字用の変数 */
+  --theme-text-inverse: #ffffff;         /* 反転文字（ピュアホワイト） - ボタンの文字や見出し用 */
+  --theme-text-inverse-muted: #e2e6ea;   /* 薄い反転文字（ライトグレー） - フッターの本文用 */
+
   --theme-border: #ced4da;      /* グレーに馴染むボーダー色 - 枠線や分割線用 */
 
   /* --- アクセント・アクション --- */
@@ -40,6 +45,8 @@
   --color-surface-alt: var(--theme-surface-alt);
   --color-text-body: var(--theme-text-body);
   --color-text-muted: var(--theme-text-muted);
+  --color-text-inverse: var(--theme-text-inverse);
+  --color-text-inverse-muted: var(--theme-text-inverse-muted);
   --color-border: var(--theme-border);
   --color-accent: var(--theme-accent);
   --color-accent-hover: var(--theme-accent-hover);
@@ -117,17 +124,17 @@ footer a {
 
   /* グリーンの塗りつぶしボタン（メインCTA） */
   .btn-primary {
-    @apply inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-white font-bold py-3 px-10 rounded-full transition duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-text-inverse font-bold py-3 px-10 rounded-full transition duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5;
   }
 
   /* ヘッダー等の狭い場所用・小型プライマリボタン */
   .btn-primary-sm {
-    @apply inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-white font-bold py-2 px-6 rounded-full transition duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-text-inverse font-bold py-2 px-6 rounded-full transition duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5;
   }
 
   /* プライマリカラー（ネイビー）の塗りつぶしボタン（サブCTA・補足的なアクション用） */
   .btn-secondary {
-    @apply inline-block bg-primary text-white font-bold py-3 px-10 rounded-full hover:opacity-80 transition shadow-lg transform hover:-translate-y-0.5;
+    @apply inline-block bg-primary text-text-inverse font-bold py-3 px-10 rounded-full hover:opacity-80 transition shadow-lg transform hover:-translate-y-0.5;
   }
 
   /* 白背景・ボーダー付きボタン（戻るボタン・サブCTA） */
@@ -137,7 +144,7 @@ footer a {
 
   /* 黒・暗い背景用の透過ボタン（ページトップなど） */
   .btn-transparent {
-    @apply inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full transition border border-white/10 text-sm font-bold;
+    @apply inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-text-inverse px-6 py-3 rounded-full transition border border-white/10 text-sm font-bold;
   }
 
   /* ========================================
@@ -177,17 +184,17 @@ footer a {
 
 /* バッジの共通ベーススタイル（色以外を定義） */
   .badge--event {
-    @apply inline-block bg-accent text-white text-xs font-bold px-3 py-1 rounded-full mb-4 tracking-wider uppercase;
+    @apply inline-block bg-accent text-text-inverse text-xs font-bold px-3 py-1 rounded-full mb-4 tracking-wider uppercase;
   }
 
   /* アクセントカラー（緑）のバッジ */
   .badge--accent {
-    @apply bg-accent text-white text-xs font-bold px-2 py-1 rounded;
+    @apply bg-accent text-text-inverse text-xs font-bold px-2 py-1 rounded;
   }
 
   /* プライマリカラー（ネイビー）のバッジ */
   .badge--primary {
-    @apply bg-primary text-white text-xs font-bold px-2 py-1 rounded;
+    @apply bg-primary text-text-inverse text-xs font-bold px-2 py-1 rounded;
   }
 
 
@@ -331,7 +338,7 @@ footer a {
 
   /* フッター内の小見出し（サイトマップ、関連リンクなど） */
   .footer-heading {
-    @apply text-white font-bold mb-6 tracking-widest border-b border-white/20 pb-2;
+    @apply text-text-inverse font-bold mb-6 tracking-widest border-b border-white/20 pb-2;
   }
 
   /* フッター内の標準テキスト */
@@ -341,12 +348,12 @@ footer a {
 
   /* フッターの一番下（コピーライトの枠） */
   .footer-copyright {
-    @apply pt-8 border-t border-white/10 text-center text-sm;
+    @apply pt-8 border-t border-white/10 text-text-muted text-center text-sm;
   }
 
   /* フッター内のリストリンク（矢印付き） */
   .footer-link {
-    @apply hover:text-white transition flex items-center text-surface-alt;
+    @apply hover:text-text-inverse transition flex items-center text-text-muted;
   }
 
   /* フッターリンクの左側に自動で右矢印(fa-chevron-right)を付与 */
