@@ -364,4 +364,70 @@ footer a {
     @apply text-[10px] text-accent mr-2 transition duration-300;
   }
 
+
+  /* ========================================
+     Specialセクション カード
+     ======================================== */
+
+  /* カード共通ベース */
+  .card--special-accent,
+  .card--special-primary {
+    @apply bg-surface p-8 rounded-xl shadow-md flex flex-col justify-between h-full border-t-4;
+  }
+
+  /* アクセント（緑）ボーダーのカード */
+  .card--special-accent {
+    @apply border-accent;
+  }
+
+  /* プライマリ（ネイビー）ボーダーのカード */
+  .card--special-primary {
+    @apply border-primary;
+  }
+
+  /* カード内の見出し（h3） */
+  .card-special-title {
+    @apply text-2xl font-bold text-primary mb-6 flex items-center;
+  }
+
+  /* カード下部のボタンエリア */
+  .card-special-footer {
+    @apply text-center mt-auto pt-8;
+  }
+
+  /* 無効化ボタン（近日公開など） */
+  .btn-disabled {
+    @apply inline-block bg-gray-300 text-gray-500 text-sm font-bold py-3 px-10 rounded-full cursor-not-allowed shadow-inner;
+  }
+
+
+  /* ========================================
+     イベント一覧アイテム
+     ======================================== */
+
+  /* イベント1件分の行 */
+  .event-item {
+    @apply block p-3 border-b border-border rounded-lg transition;
+  }
+
+  /* 日付＋タグのメタ情報行 */
+  .event-meta {
+    @apply text-xs text-text-muted mb-1 flex items-center flex-wrap gap-1;
+  }
+
+
+  /* ========================================
+     感染症対策リスト
+     ======================================== */
+
+  /* 対策リストの1行（アイコン＋テキスト） */
+  .infection-item {
+    @apply flex items-start;
+  }
+
+  /* 「対策」バッジ */
+  .infection-badge {
+    @apply bg-surface-alt text-primary p-1 rounded mr-3 text-xs border border-border;
+  }
+
 }
