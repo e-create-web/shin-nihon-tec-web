@@ -187,23 +187,29 @@ footer a {
   }
 
 
-  /* ========================================
+/* ========================================
      パンくずリスト
      ======================================== */
 
   /* パンくずリストのコンテナ */
   .breadcrumb {
-    @apply text-sm text-text-muted mb-8;
+    @apply text-sm text-text-muted mb-8 flex items-center flex-wrap;
   }
 
-  /* パンくずリスト内のリンク */
+  /* パンくずリスト内のリンク（過去のページ） */
   .breadcrumb a {
-    @apply hover:text-accent transition;
+    @apply hover:text-accent transition font-bold flex items-center;
   }
 
-  /* パンくずリスト内の現在ページ */
+  /* ★ここが魔法！ リンク（aタグ）の右側に自動で矢印（›）を挿入します */
+  .breadcrumb a::after {
+    content: '\203A'; /* 特殊文字（›）のコード */
+    @apply text-text-muted font-normal mx-2; /* 矢印の色と余白を指定 */
+  }
+
+  /* 現在のページ（一番最後の文字） */
   .breadcrumb span {
-    @apply text-primary font-bold;
+    @apply text-primary font-bold truncate;
   }
 
 
