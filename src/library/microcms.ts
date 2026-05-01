@@ -12,12 +12,12 @@ export const client = createClient({
 // 型定義
 export type Event = {
   id: string;
-  event_title: string;
-  english_title: string;
-  date: string;
-  tags: string;
   content: string;
-  photo_gallery: {
+  date: string;
+  tags: string[];
+  title?: string;
+  english_title?: string;
+  photo_gallery?: {
     fieldId: "photo_item";
     image: { url: string; width: number; height: number };
     photo_title: string;
