@@ -120,7 +120,12 @@ footer a {
     @apply inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-white font-bold py-3 px-10 rounded-full transition duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5;
   }
 
-  /* 白背景・ボーダー付きボタン（戻るボタン・サブCTA） */
+  /* ヘッダー等の狭い場所用・小型プライマリボタン */
+  .btn-primary-sm {
+    @apply inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-white font-bold py-2 px-6 rounded-full transition duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5;
+  }
+
+  /* プライマリカラー（ネイビー）の塗りつぶしボタン（サブCTA・補足的なアクション用） */
   .btn-secondary {
     @apply inline-block bg-primary text-white font-bold py-3 px-10 rounded-full hover:opacity-80 transition shadow-lg transform hover:-translate-y-0.5;
   }
@@ -246,6 +251,11 @@ footer a {
     @apply bg-surface/95 backdrop-blur shadow-md fixed w-full z-50 transition-all duration-300;
   }
 
+  /* ヘッダーのロゴ（ブランド）リンク */
+  .header-brand {
+    @apply text-xl md:text-2xl font-bold text-primary flex items-center leading-none;
+  }
+
   /* ドロップダウンを持たない通常のリンク */
   .nav-link {
     @apply hover:text-accent transition py-2 border-b-2 border-transparent hover:border-accent;
@@ -287,6 +297,14 @@ footer a {
      モバイルナビゲーション
      ======================================== */
 
+
+
+
+  /* モバイルメニューのカテゴリ見出し */
+  .mobile-menu {
+    @apply hidden absolute top-full left-0 w-full bg-surface shadow-lg xl:hidden flex-col border-t border-border max-h-[80vh] overflow-y-auto;
+  }
+
   /* モバイルメニューのカテゴリ見出し */
   .mobile-menu-heading {
     @apply border-b border-border bg-light/50 font-bold text-sm px-4 py-2 text-text-muted;
@@ -297,10 +315,34 @@ footer a {
     @apply block py-3 pl-8 pr-4 text-primary font-bold hover:bg-light border-b border-border transition;
   }
 
+  /* モバイルメニュー内の最後のリンク */
+  .mobile-menu-link--last {
+    @apply block py-4 px-4 bg-light text-center text-accent font-bold transition;
+  }
+
+  /* スマホ用のハンバーガーメニューボタン */
+  .mobile-menu-btn {
+    @apply text-primary hover:text-accent focus:outline-none p-2 transition;
+  }
 
   /* ========================================
      フッター
      ======================================== */
+
+  /* フッター内の小見出し（サイトマップ、関連リンクなど） */
+  .footer-heading {
+    @apply text-white font-bold mb-6 tracking-widest border-b border-white/20 pb-2;
+  }
+
+  /* フッター内の標準テキスト */
+  .footer-text {
+    @apply text-sm leading-relaxed text-surface-alt;
+  }
+
+  /* フッターの一番下（コピーライトの枠） */
+  .footer-copyright {
+    @apply pt-8 border-t border-white/10 text-center text-sm;
+  }
 
   /* フッター内のリストリンク（矢印付き） */
   .footer-link {

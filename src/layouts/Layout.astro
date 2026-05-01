@@ -17,10 +17,11 @@ import '../styles/top.css';
 </head>
 <body class="text-text-body scroll-smooth bg-light flex flex-col min-h-screen">
 
-    <!-- ヘッダー共通クラス適用 -->
+    <!-- ヘッダー -->
     <header class="header-nav">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="/" class="text-xl md:text-2xl font-bold text-primary flex items-center group leading-none">
+            <!-- ロゴ -->
+            <a href="/" class="header-brand group">
                 <img src="/assets/images/logo.png" alt="新ニホンテック" class="h-10 md:h-12 w-auto mr-3 group-hover:opacity-80 transition">
                 <div>
                     <span class="block text-xs md:text-sm text-text-muted font-normal">電気工事・自動制御・CO2削減</span>
@@ -28,6 +29,7 @@ import '../styles/top.css';
                 </div>
             </a>
             
+            <!-- デスクトップナビゲーション -->
             <nav class="hidden xl:flex space-x-6 text-sm font-bold text-primary items-center">
                 <!-- 企業情報 -->
                 <div class="relative group py-2">
@@ -63,13 +65,15 @@ import '../styles/top.css';
                 <a href="/#access" class="nav-link">アクセス</a>
 
                 <!-- お問い合わせボタン（すでに common.css の btn-primary を使ってもOKですが、少し形が違うので直接指定を残します） -->
-                <a href="#contact" class="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-full transition shadow-lg transform hover:-translate-y-0.5">
+                <!-- <a href="#contact" class="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-full transition shadow-lg transform hover:-translate-y-0.5">
                     お問い合わせ
-                </a>
+                </a> -->
+                <a href="/#contact" class="btn-primary-sm">お問い合わせ</a>
             </nav>
 
+            <!-- モバイルメニュー用ボタン -->
             <div class="xl:hidden">
-                <button id="menu-btn" type="button" class="text-primary hover:text-accent focus:outline-none p-2 transition">
+                <button id="menu-btn" type="button" class="mobile-menu-btn" aria-label="メニューを開く">
                     <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -77,8 +81,8 @@ import '../styles/top.css';
             </div>
         </div>
 
-        <!-- モバイルメニュー共通クラス適用 -->
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-surface shadow-lg xl:hidden flex-col border-t border-border max-h-[80vh] overflow-y-auto">
+        <!-- モバイルメニュー -->
+        <div id="mobile-menu" class="mobile-menu">
             <div class="mobile-menu-heading">企業情報</div>
             <a href="/#about" class="mobile-menu-link">会社方針</a>
             <a href="/#company" class="mobile-menu-link">企業概要</a>
@@ -97,30 +101,34 @@ import '../styles/top.css';
             <div class="mobile-menu-heading">その他</div>
             <a href="/#recruit" class="mobile-menu-link">採用情報</a>
             <a href="/#access" class="mobile-menu-link">アクセス</a>
-            <a href="#contact" class="block py-4 px-4 bg-light text-center text-accent font-bold transition">お問い合わせ</a>
+            <a href="#contact" class="mobile-menu-link--last">お問い合わせ</a>
         </div>
     </header>
 
     <slot />
 
+    <!-- フッター -->
     <footer class="bg-primary text-text-muted py-16 border-t border-primary">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12">
                 
+                <!-- 会社情報（画面左） -->
                 <div class="md:col-span-1">
                     <h3 class="text-2xl font-bold text-white mb-6">株式会社 新二ホンテック</h3>
-                    <p class="text-sm leading-relaxed text-surface-alt mb-4">
+                    <!-- ★ footer-text を適用（mb-4 は固有の余白なので残す） -->
+                    <p class="footer-text mb-4">
                         〒400-0057<br>
                         山梨県甲府市高室町688-2<br>
                     </p>
-                    <p class="text-sm text-surface-alt font-mono">
+                    <p class="footer-text font-mono">
                         TEL: 055-241-9231<br>
                         FAX: 055-241-9223
                     </p>
                 </div>
 
+                <!-- サイトマップ（画面中央） -->
                 <div class="md:col-span-2">
-                    <h4 class="text-white font-bold mb-6 tracking-widest border-b border-white/20 pb-2">サイトマップ</h4>
+                    <h4 class="footer-heading">サイトマップ</h4>
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
                         <!-- フッターリンク共通クラス適用 -->
                         <ul class="space-y-3">
@@ -143,11 +151,13 @@ import '../styles/top.css';
                     </div>
                 </div>
 
+                <!-- 関連リンク（画面右） -->
                 <div class="md:col-span-1 flex flex-col justify-between">
                     <div>
-                        <h4 class="text-white font-bold mb-6 tracking-widest border-b border-white/20 pb-2">関連リンク</h4>
+                        <!-- 関連リンクの見出し -->
+                        <h4 class="footer-heading">関連リンク</h4>
                         
-                        <!-- ★ 透過カードクラスを適用 -->
+                        <!-- ボタン（★ 透過カードクラスを適用） -->
                         <a href="https://www.e-kuri.com/" target="_blank" rel="noopener noreferrer" class="card--transparent group mb-4">
                             <i class="fas fa-building text-text-muted group-hover:text-white mr-4 text-xl transition"></i>
                             <div>
@@ -157,6 +167,7 @@ import '../styles/top.css';
                         </a>
                     </div>
                     
+                    <!-- ページトップへ戻るボタン -->
                     <div class="text-right mt-8">
                         <!-- ★ 透過ボタンクラスを適用 -->
                         <a href="/" class="btn-transparent w-full md:w-auto">
@@ -167,7 +178,8 @@ import '../styles/top.css';
 
             </div>
             
-            <div class="pt-8 border-t border-white/10 text-center text-sm">
+            <!-- ★ footer-copyright を適用 -->
+            <div class="footer-copyright">
                 <p>© SHINNIHONTEC CO., LTD. All Rights Reserved.</p>
             </div>
         </div>
