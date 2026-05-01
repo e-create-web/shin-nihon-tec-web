@@ -13,26 +13,24 @@ const allCategories = Array.from(new Set(
 ---
 
 <Layout title="開発・製作実績 | 株式会社 新ニホンテック">
-    <!-- 背景に bg-light を適用 (すでに設定済み) -->
-    <div class="pt-24 pb-20 bg-light min-h-screen">
-        <div class="container mx-auto px-4 max-w-5xl">
-            
+    <main class="pt-32 pb-20 bg-surface-alt min-h-screen">
+        <div class="section-container max-w-5xl">
+
             <!-- パンくずリスト -->
-            <div class="text-sm text-text-muted mb-8">
-                <a href="/" class="hover:text-accent transition font-bold"><i class="fas fa-home mr-1"></i>トップ</a> &rsaquo;
-                <span class="text-primary font-bold">開発・製作実績</span>
+            <nav class="breadcrumb">
+                <a href="/"><i class="fas fa-home mr-1"></i>トップ</a>
+                <span>開発・製作実績</span>
+            </nav>
+
+            <!-- ページタイトル -->
+            <div class="text-center mb-12 md:mb-16">
+                <span class="section-eyebrow">Works</span>
+                <h1 class="section-title tracking-wider">開発・製作実績</h1>
+                <div class="section-divider"></div>
             </div>
 
-            <!-- タイトル -->
-            <div class="text-center mb-12 md:mb-20">
-                <span class="text-accent font-eng tracking-widest text-sm md:text-base font-bold block mb-2 uppercase">Works</span>
-                <h1 class="text-3xl md:text-4xl font-bold text-primary mb-4 tracking-wider">開発・製作実績</h1>
-                <div class="w-12 h-1 bg-accent mx-auto"></div>
-            </div>
-
-            <!-- ★ bg-white -> bg-surface, border-gray-100 -> border-border -->
             <div class="bg-surface rounded-xl shadow-lg p-6 md:p-10 border border-border">
-                
+
                 <!-- 絞り込みボタン -->
                 <div class="mb-8 border-b border-border pb-6">
                     <div class="flex flex-wrap gap-2" id="category-filters">
@@ -40,7 +38,6 @@ const allCategories = Array.from(new Set(
                             すべて
                         </button>
                         {allCategories.map(category => (
-                            <!-- ★ bg-gray-100 -> bg-surface-alt, border-gray-200 -> border-border -->
                             <button class="filter-btn px-4 py-2 rounded-full text-sm font-bold transition bg-surface-alt text-primary hover:bg-border border border-border" data-category={category}>
                                 {category}
                             </button>
@@ -57,25 +54,20 @@ const allCategories = Array.from(new Set(
                         const imgUrl = work['top-image'] ? work['top-image'].url : '/assets/images/logo.png';
 
                         return (
-                            <!-- ★ bg-white -> bg-surface, border-gray-200 -> border-border -->
-                            <a href={`/works/${work.id}`} class="work-item flex flex-col bg-surface rounded-lg shadow-sm hover:shadow-xl transition group border border-border overflow-hidden h-full" data-categories={categoriesString}>
-                                
-                                <!-- ★ bg-gray-50 -> bg-surface-alt -->
+                            <a href={`/works/${work.id}`} class="work-item card--works flex flex-col group overflow-hidden h-full" data-categories={categoriesString}>
                                 <div class="overflow-hidden h-40 relative bg-surface-alt shrink-0">
                                     <img src={imgUrl} class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt={work.title}>
                                     {displayCategory && (
-                                        <div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded shadow-sm">{displayCategory}</div>
+                                        <div class="absolute top-2 left-2">
+                                            <span class="badge--primary">{displayCategory}</span>
+                                        </div>
                                     )}
                                 </div>
-                                
-                                <!-- ★ bg-white -> bg-surface -->
                                 <div class="p-3 bg-surface flex flex-col flex-1">
                                     <h3 class="font-bold text-base mb-2 text-primary group-hover:text-accent transition line-clamp-2">{work.title}</h3>
-                                    
-                                    <!-- ★ text-gray-500, text-gray-400 -> text-text-muted -->
                                     {work.location && (
                                         <p class="text-xs text-text-muted mt-auto">
-                                            <i class="fas fa-map-marker-alt mr-1 text-text-muted"></i>{work.location}
+                                            <i class="fas fa-map-marker-alt mr-1"></i>{work.location}
                                         </p>
                                     )}
                                 </div>
@@ -86,21 +78,23 @@ const allCategories = Array.from(new Set(
 
                 <!-- ページネーション -->
                 <div id="pagination" class="flex justify-center items-center gap-2 mt-10"></div>
+
             </div>
 
+            <!-- 戻るボタン -->
             <div class="mt-16 text-center">
-                <!-- ★ bg-white -> bg-surface, border-gray-300 -> border-border, hover:bg-gray-50 -> hover:bg-surface-alt -->
-                <a href="/#works" class="inline-block bg-surface border border-border text-primary font-bold py-3 px-8 rounded-full hover:bg-surface-alt transition shadow-sm hover:-translate-y-0.5">
-                    トップページへ戻る
+                <a href="/#works" class="btn-back">
+                    <i class="fas fa-arrow-left mr-2"></i> トップページへ戻る
                 </a>
             </div>
+
         </div>
-    </div>
+    </main>
 </Layout>
 
 <script is:inline>
 document.addEventListener('DOMContentLoaded', () => {
-    const ITEMS_PER_PAGE = 9; // 3列 × 3段
+    const ITEMS_PER_PAGE = 9;
     let currentPage = 1;
     let currentFilter = 'all';
 
@@ -137,13 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 1; i <= totalPages; i++) {
             const btn = document.createElement('button');
             btn.textContent = i;
-            if (i === currentPage) {
-                btn.className = 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-accent text-white shadow-md';
-            } else {
-                // ★ bg-gray-100 -> bg-surface-alt, border-gray-200 -> border-border
-                btn.className = 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-surface-alt text-primary hover:bg-border border border-border transition cursor-pointer';
-            }
-            
+            btn.className = i === currentPage
+                ? 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-accent text-white shadow-md'
+                : 'w-10 h-10 rounded-full flex items-center justify-center font-bold bg-surface-alt text-primary hover:bg-border border border-border transition cursor-pointer';
+
             btn.addEventListener('click', () => {
                 currentPage = i;
                 render();
@@ -157,10 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', (e) => {
             filterBtns.forEach(b => {
                 b.classList.remove('bg-primary', 'text-white', 'shadow-md');
-                // ★ bg-gray-100 -> bg-surface-alt
                 b.classList.add('bg-surface-alt', 'text-primary');
             });
-            // ★ bg-gray-100 -> bg-surface-alt
             e.currentTarget.classList.remove('bg-surface-alt', 'text-primary');
             e.currentTarget.classList.add('bg-primary', 'text-white', 'shadow-md');
 

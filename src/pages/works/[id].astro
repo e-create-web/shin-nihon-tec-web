@@ -20,54 +20,55 @@ const imgUrl = work['top-image'] ? work['top-image'].url : '';
 ---
 
 <Layout title={`${work.title} | 開発・製作実績 | 株式会社 新ニホンテック`}>
+
+  <!-- ヒーローセクション（events/[id].astro と同じ構造で統一） -->
   <section class="bg-primary text-white py-24 relative overflow-hidden mt-16">
     <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-    <div class="container mx-auto px-4 relative z-10 text-center">
+    <div class="section-container relative z-10 text-center">
       {displayCategory && (
-        <span class="inline-block bg-accent text-white text-xs font-bold px-3 py-1 rounded-full mb-4 tracking-wider">{displayCategory}</span>
+        <span class="badge--event">{displayCategory}</span>
       )}
       <h1 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">{work.title}</h1>
-      {work.location && <p class="text-blue-200 tracking-widest"><i class="fas fa-map-marker-alt mr-2"></i>{work.location}</p>}
+      {work.location && (
+        <p class="text-surface-alt tracking-widest mt-2">
+          <i class="fas fa-map-marker-alt mr-2"></i>{work.location}
+        </p>
+      )}
     </div>
   </section>
 
-  <main class="container mx-auto px-4 max-w-4xl py-12">
+  <main class="pt-12 pb-20 bg-surface-alt min-h-screen">
+    <div class="section-container max-w-4xl">
 
-    <!-- パンくずリスト -->
-    <!-- ★ text-gray-500 -> text-text-muted -->
-    <div class="text-sm text-text-muted mb-10 flex items-center">
-      <a href="/" class="hover:text-accent transition font-bold"><i class="fas fa-home mr-1"></i>トップ</a> 
-      <span class="mx-2">&rsaquo;</span>
-      <a href="/works" class="hover:text-accent transition font-bold">開発・製作実績</a> 
-      <span class="mx-2">&rsaquo;</span>
-      <!-- ★ text-gray-800 -> text-primary -->
-      <span class="text-primary font-bold truncate">{work.title}</span>
-    </div>
+      <!-- パンくずリスト -->
+      <nav class="breadcrumb">
+        <a href="/"><i class="fas fa-home mr-1"></i>トップ</a>
+        <a href="/works">開発・製作実績</a>
+        <span>{work.title}</span>
+      </nav>
 
-    <!-- トップ画像 -->
-    {imgUrl && (
-        <!-- ★ border-gray-100 -> border-border -->
+      <!-- トップ画像 -->
+      {imgUrl && (
         <div class="mb-12 rounded-2xl overflow-hidden shadow-lg border border-border">
-            <img src={imgUrl} alt={work.title} class="w-full h-auto md:max-h-[500px] object-cover hover:scale-105 transition duration-700" />
+          <img src={imgUrl} alt={work.title} class="w-full h-auto md:max-h-[500px] object-cover hover:scale-105 transition duration-700" />
         </div>
-    )}
+      )}
 
-    <!-- 本文 (リッチエディタ) -->
-    {work.content && (
-        <!-- ★ bg-white -> bg-surface, border-gray-100 -> border-border -->
-        <div class="bg-surface p-8 md:p-12 rounded-2xl shadow-sm border border-border">
-            <!-- ★ text-gray-700 -> text-text-body -->
-            <div class="prose max-w-none text-text-body leading-relaxed" set:html={work.content}></div>
+      <!-- 本文（リッチエディタ） -->
+      {work.content && (
+        <div class="bg-surface p-8 md:p-12 rounded-2xl shadow-sm border border-border mb-12">
+          <div class="prose max-w-none text-text-body leading-relaxed" set:html={work.content}></div>
         </div>
-    )}
+      )}
 
-    <!-- 戻るボタン -->
-    <div class="text-center mt-12 mb-8">
-      <!-- ★ bg-white -> bg-surface -->
-      <a href="/works" class="inline-flex items-center justify-center bg-surface border-2 border-primary text-primary font-bold py-3 px-10 rounded-full hover:bg-primary hover:text-white transition shadow-sm">
-        <i class="fas fa-arrow-left mr-2"></i> 実績一覧に戻る
-      </a>
+      <!-- 戻るボタン -->
+      <div class="text-center mb-8">
+        <a href="/works" class="btn-back">
+          <i class="fas fa-arrow-left mr-2"></i> 実績一覧に戻る
+        </a>
+      </div>
+
     </div>
-
   </main>
+
 </Layout>
