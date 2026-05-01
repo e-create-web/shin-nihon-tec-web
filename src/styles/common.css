@@ -125,11 +125,15 @@ footer a {
     @apply inline-block bg-primary text-white font-bold py-3 px-10 rounded-full hover:opacity-80 transition shadow-lg transform hover:-translate-y-0.5;
   }
 
-    /* 白背景・ボーダー付きボタン（戻るボタン・サブCTA） */
+  /* 白背景・ボーダー付きボタン（戻るボタン・サブCTA） */
   .btn-back {
     @apply inline-flex items-center justify-center bg-surface border border-border text-primary font-bold py-3 px-8 rounded-full hover:bg-surface-alt transition duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5;
   }
 
+  /* 黒・暗い背景用の透過ボタン（ページトップなど） */
+  .btn-transparent {
+    @apply inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full transition border border-white/10 text-sm font-bold;
+  }
 
   /* ========================================
      カード
@@ -154,6 +158,11 @@ footer a {
   /* アクセス等の小さい情報カード（bg-surface・丸み小） */
   .card--detail {
     @apply bg-surface p-6 rounded-lg shadow-sm border border-border;
+  }
+
+  /* 黒・暗い背景用の透過カード（グループ会社リンクなど） */
+  .card--transparent {
+    @apply flex items-center p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition shadow-lg;
   }
 
 
@@ -225,6 +234,85 @@ footer a {
   /* チェックマーク付きリストアイテム */
   .checklist-item {
     @apply flex items-center;
+  }
+
+
+  /* ========================================
+     ヘッダー・ナビゲーション
+     ======================================== */
+
+  /* ヘッダー全体（固定・すりガラス効果） */
+  .header-nav {
+    @apply bg-surface/95 backdrop-blur shadow-md fixed w-full z-50 transition-all duration-300;
+  }
+
+  /* ドロップダウンを持たない通常のリンク */
+  .nav-link {
+    @apply hover:text-accent transition py-2 border-b-2 border-transparent hover:border-accent;
+  }
+
+  /* ドロップダウンを持つ親リンク */
+  .nav-dropdown-trigger {
+    @apply hover:text-accent transition border-b-2 border-transparent group-hover:border-accent flex items-center;
+  }
+
+  /* ドロップダウンメニューの枠 */
+  .nav-dropdown-menu {
+    @apply absolute left-0 top-full mt-0 bg-surface shadow-xl rounded-b-lg border-t-2 border-accent opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0 z-50 overflow-hidden;
+  }
+
+  /* ドロップダウン内の各リンク */
+  .nav-dropdown-link {
+    @apply block px-4 py-3 text-sm text-primary hover:bg-light hover:text-accent transition border-b border-border;
+  }
+  
+  /* ドロップダウン内の最後のリンク（下線なし） */
+  .nav-dropdown-link--last {
+    @apply block px-4 py-3 text-sm text-primary hover:bg-light hover:text-accent transition;
+  }
+
+  /* ★魔法：ドロップダウンリンクの右側に自動で下矢印(fa-chevron-down)を付与 */
+  .nav-dropdown-trigger::after {
+    content: '\f078'; /* FontAwesomeのchevron-down */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    @apply ml-1 text-[10px] text-text-muted transition duration-300;
+  }
+
+  .nav-dropdown-trigger:hover::after {
+    @apply text-accent;
+  }
+
+  /* ========================================
+     モバイルナビゲーション
+     ======================================== */
+
+  /* モバイルメニューのカテゴリ見出し */
+  .mobile-menu-heading {
+    @apply border-b border-border bg-light/50 font-bold text-sm px-4 py-2 text-text-muted;
+  }
+
+  /* モバイルメニュー内のリンク */
+  .mobile-menu-link {
+    @apply block py-3 pl-8 pr-4 text-primary font-bold hover:bg-light border-b border-border transition;
+  }
+
+
+  /* ========================================
+     フッター
+     ======================================== */
+
+  /* フッター内のリストリンク（矢印付き） */
+  .footer-link {
+    @apply hover:text-white transition flex items-center text-surface-alt;
+  }
+
+  /* フッターリンクの左側に自動で右矢印(fa-chevron-right)を付与 */
+  .footer-link::before {
+    content: '\f054'; /* FontAwesomeのchevron-right */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    @apply text-[10px] text-accent mr-2 transition duration-300;
   }
 
 }
