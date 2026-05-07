@@ -365,3 +365,18 @@ footer a {
   }
 
 }
+
+
+/* ========================================
+   ワークフロー ステップ
+   ======================================== */
+
+/* ステップ1つ分のコンテナ */
+.workflow-step {
+  @apply bg-surface p-4 flex flex-col items-center w-full md:w-48 mb-8 md:mb-0;
+}
+
+/* ステップ番号の丸アイコン */
+.workflow-step-circle {
+  @apply w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mb-4 border-4 border-surface shadow text-surface;
+}
