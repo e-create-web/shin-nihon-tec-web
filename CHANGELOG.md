@@ -4,6 +4,25 @@
 
 ---
 
+## [v1.2.2]
+
+### 追加
+- **`.env.example`** を追加（必要な環境変数のテンプレート）
+- **`ROADMAP.md`** を追加（今後の予定。先行ブランチ `add/live-view` / `add/work-page` を記載）
+- **`docs/styles.md`** を追加（スタイル設計ガイド：共通クラス・命名規約・カラートークン）
+- **`docs/microcms.md`** を追加（microCMS スキーマ・タグの扱い・運用メモ）
+
+### 変更
+- **`README.md` を整理・拡充**
+  - 環境変数（microCMS）節、本番/Cloudflare の URL、`npm run astro` コマンド、参考リンクを追記
+  - ブランチ命名規則（`add/` `fix/` `update/` `refactor/`）を追記
+  - 設計・スキーマの詳細を `docs/` に分離し、README からリンク
+
+### 削除
+- `memo.md` を削除（内容はブランチ命名規則として README に統合）
+
+---
+
 ## [v1.2.1]
 
 ### 修正
