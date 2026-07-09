@@ -4,6 +4,19 @@
 
 ---
 
+## [v1.2.1]
+
+### 修正
+- **ヘッダーのハンバーガーメニューが開かない不具合を修正**
+  - `common.js`（メニュー開閉処理）を各ページ個別読み込みから共通の `Layout.astro` に集約（`src/layouts/Layout.astro`）
+  - `.mobile-menu` に焼き込まれていた `hidden` を除去し、要素側の `hidden`/`flex` クラスで開閉を制御するよう修正（`src/styles/common.css` / `Layout.astro`）
+  - `index.astro` / `infection.astro` の重複読み込みを削除
+
+### その他
+- `package.json` の `version` をリリースタグに合わせて更新（`0.0.1` → `1.2.1`）。以降リリースごとに追随
+
+---
+
 ## [v1.2.0]
 
 ### 追加

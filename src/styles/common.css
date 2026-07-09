@@ -309,7 +309,7 @@ footer a {
 
   /* モバイルメニューのカテゴリ見出し */
   .mobile-menu {
-    @apply hidden absolute top-full left-0 w-full bg-surface shadow-lg xl:hidden flex-col border-t border-border max-h-[80vh] overflow-y-auto;
+    @apply absolute top-full left-0 w-full bg-surface shadow-lg xl:hidden flex-col border-t border-border max-h-[80vh] overflow-y-auto;
   }
 
   /* モバイルメニューのカテゴリ見出し */
